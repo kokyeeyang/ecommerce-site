@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-Route::view('/', 'site.pages.homepage');
+Route::view('/', 'site.pages.homepage')->name('register');
 Route::get('/category/{slug}', 'Site\CategoryController@show')->name('category.show');
 Route::get('/product/{slug}', 'Site\ProductController@show')->name('product.show');
 
