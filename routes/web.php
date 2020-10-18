@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // require 'admin.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 Route::view('/', 'site.pages.homepage');
 Route::get('/category/{slug}', 'Site\CategoryController@show')->name('category.show');
@@ -36,18 +36,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('account/orders', 'Site\AccountController@getOrders')->name('account.orders');
 });
 
-
 Route::group(['prefix'  =>  'admin'], function () {
-
+    
     Route::get('login', 'Admin\LoginController@showLoginForm')->name('admin.login');
     Route::post('login', 'Admin\LoginController@login')->name('admin.login.post');
     Route::get('logout', 'Admin\LoginController@logout')->name('admin.logout');
-
+    
     Route::group(['middleware' => ['auth:admin']], function () {
-
+        
         Route::get('/', function () {
             return view('admin.dashboard.index');
-        })->name('admin.dashboard');
+        // })->name('admin.dashboard');
+        })->name('login');
 
         Route::get('/settings', 'Admin\SettingController@index')->name('admin.settings');
         Route::post('/settings', 'Admin\SettingController@update')->name('admin.settings.update');
