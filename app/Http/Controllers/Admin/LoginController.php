@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use Illuminate\Support\Arr;
+// use Illuminate\Auth\AuthenticationException;
 
 class LoginController extends Controller
 {
@@ -39,13 +41,13 @@ class LoginController extends Controller
         $this->validate($request, [
             'email'   => 'required|email',
             'password' => 'required|min:6'
-        ]);
-        if (Auth::guard('admin')->attempt([
-            'email' => $request->email,
-            'password' => $request->password
-        ], $request->get('remember'))) {
-            return redirect()->intended(route('admin.dashboard'));
-        }
+            ]);
+            if (Auth::guard('admin')->attempt([
+                'email' => $request->email,
+                'password' => $request->password
+            ], $request->get('remember'))) {
+                return redirect()->intended(route('admin.dashboard'));
+            }
         return back()->withInput($request->only('email', 'remember'));
     }
 
