@@ -10,6 +10,8 @@ use App\Http\Controllers\BaseController;
 
 class SettingController extends BaseController
 {
+    use UploadAble;
+    
     public function index()
     {
         $this->setPageTitle('Settings', 'Manage Settings');
