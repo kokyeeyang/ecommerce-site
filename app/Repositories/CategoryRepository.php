@@ -98,4 +98,14 @@ class CategoryRepository extends BaseRepository implements CategoryContract
 
         return $category;
     }
+
+    public function treeList()
+    {
+        return $this->all();
+    }
+
+    public function findBySlug($slug)
+    {
+        return $this->all();
+    }
 }
