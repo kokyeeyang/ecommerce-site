@@ -13,11 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // require 'admin.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
-Route::view('/', 'site.pages.homepage')->name('register');
+Route::view('/', 'site.pages.homepage');
 Route::get('/category/{slug}', 'Site\CategoryController@show')->name('category.show');
 Route::get('/product/{slug}', 'Site\ProductController@show')->name('product.show');
 
@@ -118,4 +115,4 @@ Route::group(['prefix'  =>  'admin'], function () {
     });
 });
 
-// Auth::routes();
+Auth::routes();
