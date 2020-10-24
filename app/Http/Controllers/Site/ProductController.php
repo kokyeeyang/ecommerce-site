@@ -20,6 +20,13 @@ class ProductController extends BaseController
         $attributeRepository = $this->attributeRepository;
     }
 
+    public function productList()
+    {
+        $products = $this->productRepository->listProducts();
+
+        return view('site.pages.homepage', compact('products'));
+    }
+
     public function show($slug)
     {
         $product = $this->productRepository->findProductBySlug($slug);
