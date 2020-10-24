@@ -1,3 +1,9 @@
+<?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+ini_set('memory_limit', '-1');
+?>
 <header class="section-header">
     <section class="header-main">
         <div class="container">
@@ -24,11 +30,11 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="widgets-wrap d-flex justify-content-end">
                         <div class="widget-header">
-                            <a href="#" class="icontext">
+                            <a href="{{ route('checkout.cart') }}" class="icontext">
                                 <div class="icon-wrap icon-xs bg2 round text-secondary"><i
                                         class="fa fa-shopping-cart"></i></div>
                                 <div class="text-wrap">
-                                    <small>3 items</small>
+                                    <small>{{ $cartCount ?? ''}} items</small>
                                 </div>
                             </a>
                         </div>
@@ -52,6 +58,7 @@
                                         {{ Auth::user()->full_name }} <span class="caret"></span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('account.orders') }}">Orders</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -69,5 +76,4 @@
             </div>
         </div>
     </section>
-    @include('site.partials.nav')
 </header>

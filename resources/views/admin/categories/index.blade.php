@@ -19,7 +19,6 @@
                                 <th> # </th>
                                 <th> Name </th>
                                 <th> Slug </th>
-                                <th class="text-center"> Parent </th>
                                 <th class="text-center"> Featured </th>
                                 <th class="text-center"> Menu </th>
                                 <th class="text-center"> Order </th>
@@ -28,12 +27,11 @@
                         </thead>
                         <tbody>
                             @foreach($categories as $category)
-                                @if ($category->id != 1)
+                                @if ($category->id != false)
                                     <tr>
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
-                                        <td>{{ $category->parent->name }}</td>
                                         <td class="text-center">
                                             @if ($category->featured == 1)
                                                 <span class="badge badge-success">Yes</span>

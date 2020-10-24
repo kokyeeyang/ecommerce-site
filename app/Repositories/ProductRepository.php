@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
@@ -29,12 +29,17 @@ class ProductRepository extends BaseRepository implements ProductContract
     {
         try {
             return $this->findOneOrFail($id);
-
         } catch (ModelNotFoundException $e) {
 
             throw new ModelNotFoundException($e);
         }
+    }
 
+    public function findProductBySlug($slug)
+    {
+        $product = Product::where('slug', $slug)->first();
+
+        return $product;
     }
 
     public function createProduct(array $params)
@@ -55,7 +60,6 @@ class ProductRepository extends BaseRepository implements ProductContract
                 $product->categories()->sync($params['categories']);
             }
             return $product;
-
         } catch (QueryException $exception) {
             throw new InvalidArgumentException($exception->getMessage());
         }

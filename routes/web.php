@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 // require 'admin.php';
 Auth::routes();
 Route::view('/', 'site.pages.homepage');
+Route::view('/signup', 'auth.login');
+
+
 
 Route::get('/category/{slug}', 'Site\CategoryController@show')->name('category.show');
 Route::get('/product/{slug}', 'Site\ProductController@show')->name('product.show');
@@ -34,8 +37,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::group(['prefix'  =>  'admin'], function () {
     
-    Route::get('login', 'Admin\LoginController@showLoginForm')->name('admin.login');
-    Route::post('login', 'Admin\LoginController@login')->name('admin.login.post');
+    // Route::get('login', 'Admin\LoginController@showLoginForm')->name('admin.login');
+    Route::get('signin', 'Admin\LoginController@showLoginForm')->name('admin.signin');
+    // Route::post('login', 'Admin\LoginController@login')->name('admin.login.post');
+    Route::post('signin', 'Admin\LoginController@login')->name('admin.login.post');
     Route::get('logout', 'Admin\LoginController@logout')->name('admin.logout');
     
     Route::group(['middleware' => ['auth:admin']], function () {
@@ -50,7 +55,8 @@ Route::group(['prefix'  =>  'admin'], function () {
         
         Route::post('/', function () {
             return view('admin.dashboard.index');
-        })->name('login');
+        // })->name('login');
+        })->name('signup');
         
         Route::get('/settings', 'Admin\SettingController@index')->name('admin.settings');
         Route::post('/settings', 'Admin\SettingController@update')->name('admin.settings.update');

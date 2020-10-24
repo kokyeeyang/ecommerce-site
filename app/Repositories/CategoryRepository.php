@@ -101,11 +101,17 @@ class CategoryRepository extends BaseRepository implements CategoryContract
 
     public function treeList()
     {
-        return $this->all();
+        return Category::orderByRaw('-name ASC')
+            ->get()
+            ->nest()
+            ->listsFlattened('name');
     }
 
     public function findBySlug($slug)
     {
-        return $this->all();
+        return Category::with('products')
+            ->where('slug', $slug)
+            ->where('menu', 1)
+            ->first();
     }
 }

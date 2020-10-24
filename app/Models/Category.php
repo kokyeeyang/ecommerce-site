@@ -9,14 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    use NestableTrait;
+
     protected $table = 'categories';
 
     protected $fillable = [
-        'name', 'slug', 'description', 'parent_id', 'featured', 'menu', 'image'
+        // 'name', 'slug', 'description', 'parent_id', 'featured', 'menu', 'image'
+        'name', 'slug', 'description', 'featured', 'menu', 'image'
     ];
 
     protected $casts = [
-        'parent_id' =>  'integer',
         'featured'  =>  'boolean',
         'menu'      =>  'boolean'
     ];
@@ -27,15 +29,15 @@ class Category extends Model
         $this->attributes['slug'] = Str::slug($value);
     }
 
-    public function parent()
-    {
-        return $this->belongsTo(Category::class, 'parent_id');
-    }
+    // public function parent()
+    // {
+    //     return $this->belongsTo(Category::class, 'parent_id');
+    // }
 
-    public function children()
-    {
-        return $this->hasMany(Category::class, 'parent_id');
-    }
+    // public function children()
+    // {
+    //     return $this->hasMany(Category::class, 'parent_id');
+    // }
 
     public function products()
     {

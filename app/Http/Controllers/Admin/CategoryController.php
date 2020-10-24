@@ -39,7 +39,7 @@ class CategoryController extends BaseController
     {
         $this->validate($request, [
             'name'      =>  'required|max:191',
-            'parent_id' =>  'required|not_in:0',
+            // 'parent_id' =>  'required|not_in:0',
             'image'     =>  'mimes:jpg,jpeg,png|max:1000'
         ]);
 
@@ -66,7 +66,7 @@ class CategoryController extends BaseController
     {
         $this->validate($request, [
             'name'      =>  'required|max:191',
-            'parent_id' =>  'required|not_in:0',
+            // 'parent_id' =>  'required|not_in:0',
             'image'     =>  'mimes:jpg,jpeg,png|max:1000'
         ]);
 
@@ -88,5 +88,13 @@ class CategoryController extends BaseController
             return $this->responseRedirectBack('Error occurred while deleting category.', 'error', true, true);
         }
         return $this->responseRedirect('admin.categories.index', 'Category deleted successfully', 'success', false, false);
+    }
+
+    public function show($slug)
+    {
+        $category = $this->categoryRepository->findBySlug($slug);
+
+        dd($category);
+        // return view('site.pages.category', compact('category')); we will add this in the next post
     }
 }
