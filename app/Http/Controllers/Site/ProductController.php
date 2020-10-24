@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Contracts\ProductContract;
 use App\Http\Controllers\BaseController;
 use App\Contracts\AttributeContract;
@@ -47,5 +48,21 @@ class ProductController extends BaseController
         Cart::add(uniqid(), $product->name, $request->input('price'), $request->input('qty'), $options);
 
         return redirect()->back()->with('message', 'Item added to cart successfully.');
+    }
+
+    public function filterProduct()
+    {
+        // $sql = 'SELECT \* FROM products WHERE name LIKE %' . '';
+        $sanitizedVariable = filter_var($_GET['product_query'], FILTER_SANITIZE_STRING);
+        
+        if($sanitizedVariable != false){
+            $sql = "SELECT * FROM products WHERE name LIKE '%" . $sanitizedVariable . "%'";
+            $products = DB::select($sql);
+
+            return view('site.pages.homepage', compact('products'));
+        } else {
+            return redirect()->back()->with('message', 'Something went wrong with your query');
+        }
+
     }
 }

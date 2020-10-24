@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Route;
 */
 // require 'admin.php';
 Auth::routes();
-Route::view('/', 'site.pages.homepage');
+// Route::view('/', 'site.pages.homepage');
+Route::get('/', 'Site\ProductController@productList');
 // Route::view('/signup', 'auth.login');
 
 
-
+Route::get('/products/filterProduct', 'Site\ProductController@filterProduct')->name('product.filter');
 Route::get('/category/{slug}', 'Site\CategoryController@show')->name('category.show');
 Route::get('/product/{slug}', 'Site\ProductController@show')->name('product.show');
 
