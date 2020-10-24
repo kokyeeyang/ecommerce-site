@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 // require 'admin.php';
 Auth::routes();
 Route::view('/', 'site.pages.homepage');
-Route::view('/signup', 'auth.login');
+// Route::view('/signup', 'auth.login');
 
 
 

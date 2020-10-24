@@ -12,17 +12,24 @@ class ProductController extends BaseController
 {
     protected $productRepository;
 
+    protected $attributeRepository;
+
     public function __construct(ProductContract $productRepository)
     {
         $this->productRepository = $productRepository;
+        $attributeRepository = $this->attributeRepository;
     }
 
     public function show($slug)
     {
         $product = $this->productRepository->findProductBySlug($slug);
-        $attributes = $this->attributeRepository->listAttributes();
 
-        return view('site.pages.category', compact('product', 'attributes'));
+        $attributes = null;
+
+        if($this->attributeRepository != null){
+            $attributes = $this->attributeRepository->listAttributes();
+        }
+        return view('site.pages.product', compact('product', 'attributes'));
     }
 
     public function addToCart(Request $request)

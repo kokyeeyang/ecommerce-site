@@ -33,7 +33,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('admin.auth.login');
+        return view('admin.auth.signin');
     }
 
     public function login(Request $request)
@@ -55,6 +55,6 @@ class LoginController extends Controller
     {
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.signin');
     }
 }
