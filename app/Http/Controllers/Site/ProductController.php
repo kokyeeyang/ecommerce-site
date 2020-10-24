@@ -52,7 +52,6 @@ class ProductController extends BaseController
 
     public function filterProduct()
     {
-        // $sql = 'SELECT \* FROM products WHERE name LIKE %' . '';
         $sanitizedVariable = filter_var($_GET['product_query'], FILTER_SANITIZE_STRING);
         
         if($sanitizedVariable != false){
